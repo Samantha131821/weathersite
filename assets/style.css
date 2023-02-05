@@ -1,0 +1,16 @@
+h1 {
+    color: white;
+    background-color: blue;
+}
+
+button {
+    width: 178px;
+    background-color: blue;
+    color: white;
+    opacity: .5;
+    margin-top: 5px;
+}
+
+button:hover{
+    opacity: 1.0;
+}

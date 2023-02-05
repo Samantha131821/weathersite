@@ -4,9 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href= "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={fc26d0c630f53a8cc7245122c5d0f9e5}" />
+    <link rel="stylesheet" href="./assets/script.js"/>
+    <link rel="stylesheet" href="./assets/style.css"/>
     <title>Weather</title>
 </head>
 <body>
-    
+    <header>
+       <h1 style="text-align:center;">Weather Dashboard</h1>
+    </header>
+    <div>
+        <div class="container-fluid">
+            <h2>Search for a City:</h2>
+            <form id="search-form" class="d-flex" role="search">
+                <div>
+                    <input id="search-input" class="form-control me-2 w-100" type="search" placeholder="City" aria-label="Search">
+                    <br>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+        <h3>5-Day Forecast:<span id="result-text"></span></h3>
+        <div id="result-content"></div>
+    </div>
+
 </body>
 </html>
