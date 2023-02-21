@@ -1,8 +1,6 @@
 let apiKey="fc26d0c630f53a8cc7245122c5d0f9e5";
-var listEl = $("#result-content");
 
 let forecastWeather = []
-
 
 
 $("#search").on("click", ()=> {
@@ -26,22 +24,35 @@ $("#search").on("click", ()=> {
 
         })
         .then((data) => {
-            //console.log('data: ', data);
+            console.log('data: ', data);
+
             let cityName = data.city.name;
-            forecastWeather.push(data.list)
+            //console.log(cityName)
 
-            //console.log('city name: ',cityName)
+            let weatherConditions = data.list[0].weather[0].main;
+            //console.log('Conditions', weatherConditions)
 
-            //console.log('forecast weather: ', forecastWeather)
+           let windSpeed = data.list[0].wind.speed;
+            //console.log ('wind speed ', windSpeed)
 
+           let humidity = data.list[0].main.humidity;
+            //console.log ('humidity', humidity)
+            
+           forecastWeather.push(data.list)
+
+        
             for (let i = 0; i < forecastWeather.length; i++) {
-                console.log(forecastWeather[i][0].main.temp)
+                // console.log(forecastWeather[i][0].main.temp)
                 let tempFarenheit =  1.8*(forecastWeather[i][0].main.temp-273) + 32; 
-                console.log('temp in farenheit: ', Math.floor(tempFarenheit))
-                
-            }
+                // console.log('temp in farenheit: ', Math.floor(tempFarenheit))
 
+            }
+        
         })
+
+        // $(document).ready(function(){
+        //     $('city-name').append() 
+        // })
 
     })
 
@@ -49,26 +60,4 @@ $("#search").on("click", ()=> {
 
 
 
-
-
-
-
-
 })
-
-
-
-
-
-
-
-
-
-
-
-// fetch(requestUrl)
-//     .then(function(response) {
-//     return response.json();
-//     console.log(data);
-// })
-

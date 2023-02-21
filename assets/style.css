@@ -14,3 +14,18 @@ button {
 button:hover{
     opacity: 1.0;
 }
+
+#info {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container {
+    border-radius: 25px;
+    border: 2px solid;
+    padding: 5px;
+    width: max-content;
+}
