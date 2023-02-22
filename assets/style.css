@@ -24,8 +24,10 @@ button:hover{
 
 
 .container {
-    border-radius: 25px;
-    border: 2px solid;
     padding: 5px;
     width: max-content;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
