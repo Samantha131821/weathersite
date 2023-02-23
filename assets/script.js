@@ -33,7 +33,7 @@ $("#search").on("click", ()=> {
 
         })
         .then((data) => {
-        // console.log('currentData: ', data);
+        console.log('currentData: ', data);
             
 
             let cityName = data.name;
@@ -47,13 +47,11 @@ $("#search").on("click", ()=> {
         
 
             // Weather Conditions icon
-            if (weatherConditions === 'Clouds') {
-                $("#current-weather-icon").append("🌥");
-            } else if (weatherConditions === 'Clear'){
-                $("#current-weather-icon").append("🌞");
-            } else if (weatherConditions === 'Rain') {
-                $("#current-weather-icon").append("🌧");
-            }
+            let imgIcon = data.weather[0].icon; 
+            let imgUrl = "http://openweathermap.org/img/w/" + imgIcon +".png";
+            $("current-weather-icon").attr('src', imgUrl);
+            console.log("Icon: ", imgIcon)
+    
 
            let windSpeed = data.wind.speed;
             $("#currentWindSpeed").append("<b>Wind Speed: </b>", windSpeed + " mph");
@@ -75,14 +73,15 @@ $("#search").on("click", ()=> {
 
         })
         .then((data) =>{
-            console.log("forecastData: ", data)
+            // console.log("forecastData: ", data)
             const dayOneWeather = data.list[0]
             const dayTwoWeather = data.list[8]
             const dayThreeWeather = data.list[16]
             const dayFourWeather = data.list[24]
             const dayFiveWeather = data.list[32]
             
-    
+
+
             // let futureDays = []
 
             // for (let i = 0; i < currentDay; i++) {
@@ -105,6 +104,11 @@ $("#search").on("click", ()=> {
             let humidity1 = dayOneWeather.main.humidity;
             $("#futureHumidity1").append("<b>Humidity: </b>", humidity1);
 
+            let imgIcon1 = dayOneWeather.weather[0].icon; 
+            let imgUrl1 = "http://openweathermap.org/img/w/" + imgIcon1 +".png";
+            $("#weather-icon1").attr('src', imgUrl1);
+           
+
             // Day Two
             let dayTwoTemp = dayTwoWeather.main.temp;
             $("#futureTemp2").append("<b>Temperature: </b>", Math.floor(dayTwoTemp));
@@ -119,6 +123,10 @@ $("#search").on("click", ()=> {
             let humidity2 = dayTwoWeather.main.humidity;
             $("#futureHumidity2").append("<b>Humidity: </b>", humidity2);
 
+            let imgIcon2 = dayTwoWeather.weather[0].icon; 
+            let imgUrl2 = "http://openweathermap.org/img/w/" + imgIcon2 +".png";
+            $("#weather-icon2").attr('src', imgUrl2);
+    
 
             // Day Three
             let dayThreeTemp = dayThreeWeather.main.temp;
@@ -134,6 +142,10 @@ $("#search").on("click", ()=> {
             let humidity3 = dayThreeWeather.main.humidity;
             $("#futureHumidity3").append("<b>Humidity: </b>", humidity3);
 
+            let imgIcon3 = dayThreeWeather.weather[0].icon; 
+            let imgUrl3 = "http://openweathermap.org/img/w/" + imgIcon3 +".png";
+            $("#weather-icon3").attr('src', imgUrl3);
+           
             // Day Four
             let dayFourTemp = dayFourWeather.main.temp;
             $("#futureTemp4").append("<b>Temperature: </b>", Math.floor(dayFourTemp));
@@ -146,6 +158,11 @@ $("#search").on("click", ()=> {
 
             let humidity4 = dayFourWeather.main.humidity;
             $("#futureHumidity4").append("<b>Humidity: </b>", humidity4);
+
+            let imgIcon4 = dayFourWeather.weather[0].icon; 
+            let imgUrl4 = "http://openweathermap.org/img/w/" + imgIcon4 +".png";
+            $("#weather-icon4").attr('src', imgUrl4);
+          
 
             // Day Five
             let dayFiveTemp = dayFiveWeather.main.temp;
@@ -160,23 +177,11 @@ $("#search").on("click", ()=> {
             let humidity5 = dayFiveWeather.main.humidity;
             $("#futureHumidity5").append("<b>Humidity: </b>", humidity5);
 
+            let imgIcon5 = dayFiveWeather.weather[0].icon; 
+            let imgUrl5 = "http://openweathermap.org/img/w/" + imgIcon5 +".png";
+            $("#weather-icon5").attr('src', imgUrl5);
+           
 
-            
-            // /icons
-            conditionsArray = [weatherCond1, weatherCond2, weatherCond3, weatherCond4, weatherCond5];
-
-            for (let i = 0; i < conditionsArray.length; i++) {
-                console.log(conditionsArray)
-                
-                if (conditionsArray[i] === 'Clouds') {
-                    $(".weather-icon").append("🌥");
-                } else if(conditionsArray[i] === 'Clear'){
-                    $(".weather-icon").append("🌞");
-                } else if (conditionsArray[i] === 'Rain') {
-                    $(".weather-icon").append("🌧");
-                }
-                
-            }
             
         })  
     })
