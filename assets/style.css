@@ -1,3 +1,7 @@
+body {
+    background-color:rgb(209, 221, 223);
+}
+
 h1 {
     color: white;
     background-color: blue;
@@ -13,6 +17,14 @@ button {
 
 button:hover{
     opacity: 1.0;
+}
+
+#prevSearches {
+    border: solid;
+    border-color: black;
+    border-radius: 50px;
+    width: max-content;
+    padding: 10px;
 }
 
 #info {
@@ -34,4 +46,18 @@ button:hover{
 
 .row {
     text-align: center;    ;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+}
+
+@media only screen and (min-width: 1200px) {
+    
 }
