@@ -9,3 +9,5 @@ The user can search a city and the results will be displayed as well as saved in
 
 
 https://github.com/Samantha131821/weathersite
+
+https://samantha131821.github.io/weathersite/
