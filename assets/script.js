@@ -1,7 +1,7 @@
 let apiKey="fc26d0c630f53a8cc7245122c5d0f9e5";
 let storedWeather = JSON.parse(localStorage.getItem("weather")) || [];
 
-// if(storedWeather.length != 0){
+// if(storedWeather.length = 0){
 //     updateForecastSearch(0)
 // }
 
@@ -18,6 +18,9 @@ $("#search").on("click", ()=> {
     var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userCity},&limit=1&appid=${apiKey}`;
       
 
+    // $("search-history").html(userCity);
+    
+ 
 
     // Current Forecast
 
@@ -48,13 +51,13 @@ $("#search").on("click", ()=> {
             currentDay.text(today.format('M/D/YYYY'));
 
             let cityName = data.name;
-            $(".city-name").append(cityName);
+            $(".city-name").html(cityName);
 
             let currentTemp = data.main.temp;
-            $("#currentTemp").append(Math.floor(currentTemp) + "°");
+            $("#currentTemp").html(Math.floor(currentTemp) + "°");
 
             let weatherConditions = data.weather[0].main;
-            $("#currentCond").append("<b>Conditions: </b>", weatherConditions);
+            $("#currentCond").html("<b>Conditions: </b>" + weatherConditions);
         
 
             // Weather Conditions icon- current weather
@@ -65,35 +68,27 @@ $("#search").on("click", ()=> {
     
 
            let windSpeed = data.wind.speed;
-            $("#currentWindSpeed").append("<b>Wind: </b>", windSpeed + " mph");
+            $("#currentWindSpeed").html("<b>Wind: </b>" + windSpeed + " mph");
 
            let humidity = data.main.humidity;
-            $("#currentHumidity").append("<b>Humidity: </b>", humidity);
+            $("#currentHumidity").html("<b>Humidity: </b>" + humidity);
 
-            updateStoredWeather(cityName, currentTemp, weatherConditions, windSpeed, humidity)
+            updateStoredCities(cityName)
         });
 
-        function updateStoredWeather(cityName, currentTemp, weatherConditions, windSpeed, humidity){
-            let weatherObj = {
-                cityName:'',
-                currentTemp:'',
-                weatherConditions:'',
-                windSpeed:'',
-                humidity:''
-            }
-
-            weatherObj.cityName = cityName;
-            weatherObj.currentTemp = currentTemp;
-            weatherObj.weatherConditions = weatherConditions;
-            weatherObj.windSpeed = windSpeed;
-            weatherObj.humidity = humidity;
-            storedWeather.push(weatherObj);
-            localStorage.setItem("weather", JSON.stringify(storedWeather))
-        }
-
     
+        function updateStoredCities(cityName){
+            let storedCities = JSON.parse(localStorage.getItem("cityName")) || [];
 
+            storedCities.push(cityName);
+            localStorage.setItem("cityName", JSON.stringify(storedCities))
 
+            let searchHistory = $(`<button>${cityName}</button>`)
+            let previousSearches = $("#searchHistory")
+            previousSearches.append(searchHistory);
+
+        }
+      
 
         // 5 Day Forecast
 
