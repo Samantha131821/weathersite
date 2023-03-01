@@ -1,24 +1,12 @@
 let apiKey="fc26d0c630f53a8cc7245122c5d0f9e5";
 let storedWeather = JSON.parse(localStorage.getItem("weather")) || [];
 
-// if(storedWeather.length = 0){
-//     updateForecastSearch(0)
-// }
-
-
-
-// function updateForecastSearch(index){
-//     $(".container").empty();
-// }
-
 
 $("#search").on("click", ()=> {
     let searchInput = $("#search-input");
     let userCity = searchInput.val();
     var geoUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${userCity},&limit=1&appid=${apiKey}`;
-      
-
-    // $("search-history").html(userCity);
+    
     
  
 
@@ -79,14 +67,23 @@ $("#search").on("click", ()=> {
     
         function updateStoredCities(cityName){
             let storedCities = JSON.parse(localStorage.getItem("cityName")) || [];
-
-            storedCities.push(cityName);
-            localStorage.setItem("cityName", JSON.stringify(storedCities))
-
-            let searchHistory = $(`<button>${cityName}</button>`)
             let previousSearches = $("#searchHistory")
-            previousSearches.append(searchHistory);
 
+            storedCities.unshift(cityName)
+            if (storedCities.length === 6) {
+                storedCities.pop();
+                
+            }
+            localStorage.setItem("cityName", JSON.stringify(storedCities))
+            console.log(storedCities)
+            // when searches gets to 5 remove oldest search
+            previousSearches.empty();
+
+            for (let i = 0; i < storedCities.length; i++) {
+                let searchHistory = $(`<button>${storedCities[i]}</button>`)
+                previousSearches.append(searchHistory);
+                
+            }
         }
       
 
@@ -100,14 +97,26 @@ $("#search").on("click", ()=> {
         .then((data) =>{
 
             
-            console.log("forecastData: ", data)
-            const dayOneWeather = data.list[0]
-            const dayTwoWeather = data.list[8]
-            const dayThreeWeather = data.list[16]
-            const dayFourWeather = data.list[24]
-            const dayFiveWeather = data.list[32]
             
 
+            for (let i = 0; i < array.length; i+8) {
+                let forecastWeather = data.list[i]
+                let dayTemp = forecastWeather.main.temp;
+                let weatherCond = forecastWeather.weather[0].main;
+                let windSpeed = forecastWeather.wind.speed;
+                let humidity = forecastWeather.main.humidity;
+                let imgIcon = forecastWeather.weather[0].icon; 
+                let imgUrl = "http://openweathermap.org/img/w/" + imgIcon +".png";
+                let dateTxt = new Date(forecastWeather.dt_txt).toLocaleDateString();
+              
+                $("#futureTemp1").append(Math.floor(dayTemp) + "°");
+                $("#futureCond1").append("<b>Conditions: </b>", weatherCond);
+                $("#futureWindSpeed1").append("<b>Wind: </b>", windSpeed + " mph");
+                $("#futureHumidity1").append("<b>Humidity: </b>", humidity);
+                $("#weather-icon1").attr('src', imgUrl);
+                $("#dayOne > .futureDate").text(dateTxt);
+                
+            }
 
             // Day One
             let dayOneTemp = dayOneWeather.main.temp;
